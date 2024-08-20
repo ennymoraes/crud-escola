@@ -8,6 +8,10 @@ models.Base.metadata.create_all(bind=database.engine)
 # Instancia a aplicação FastAPI
 app = FastAPI()
 
+@app.get("/")
+async def read_root():
+    return {"message": "Bem-vindo ao meu aplicativo!"}
+
 # Endpoint para criar um novo aluno
 @app.post("/students/", response_model=schemas.Student)
 def create_student(student: schemas.StudentCreate, db: Session = Depends(database.get_db)):
